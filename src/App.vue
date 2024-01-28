@@ -2,8 +2,4 @@
     <router-view />
 </template>
 
-<style lang="scss">
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-}
-</style>
+<style lang="scss"></style>

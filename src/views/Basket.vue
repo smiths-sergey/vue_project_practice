@@ -7,7 +7,7 @@
         <div class="content">
             <div class="order-sum">
                 <p class="name">ЗАКАЗ НА СУММУ:</p>
-                <p class="sum">6 220 ₽</p>
+                <p class="sum">{{ sumBusket.toLocaleString() + ' ₽' }}</p>
             </div>
             <Button type="basket" text="Оформить заказ"></Button>
         </div>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 import HeaderBlock from '@/components/blocks/Header.vue';
 import ProductList from '@/components/blocks/ProductList.vue';
 import Button from '@/components/ui/Button.vue';
@@ -25,6 +27,16 @@ export default {
         HeaderBlock,
         ProductList,
         Button,
+    },
+    setup() {
+        const store = useStore();
+        const sumBusket = computed(() => {
+            return store.getters.getAllPricePoductsInBasket;
+        });
+
+        return {
+            sumBusket,
+        };
     },
 };
 </script>

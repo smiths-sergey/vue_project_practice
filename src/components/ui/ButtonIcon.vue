@@ -23,8 +23,5 @@ export default {
     border-radius: 50%;
     font-size: 25px;
 }
-.button_icon:hover {
-    background-color: #d58c51;
-    border: none;
-}
+
 </style>

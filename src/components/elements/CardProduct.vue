@@ -11,13 +11,13 @@
                 :src="require('@/assets/' + imgFileName)"
                 alt="image"
             />
-            <p class="card__name">{{ name }}</p>
+            <p class="card__title">{{ title }}</p>
             <p v-if="type == 'main'" class="card__description">
                 {{ description }}
             </p>
         </div>
         <div class="card__price-block">
-            <p class="card__price">{{ price }}</p>
+            <p class="card__price">{{ price.toLocaleString()+' ₽' }}</p>
             <ButtonIcon class="card_button" />
         </div>
     </div>
@@ -32,7 +32,7 @@ export default {
         ButtonIcon,
     },
     props: {
-        name: {
+        title: {
             type: String,
             default: '',
         },
@@ -41,8 +41,8 @@ export default {
             default: '',
         },
         price: {
-            type: String,
-            default: '',
+            type: Number,
+            default: 0,
         },
         imgFileName: {
             type: String,
@@ -86,7 +86,7 @@ export default {
         margin-top: 21px;
     }
 
-    .card__name {
+    .card__title {
         font-size: 17px;
         font-weight: 500;
         margin-bottom: 9px;
@@ -116,7 +116,7 @@ export default {
         margin-right: 88px;
     }
 
-    .card__name {
+    .card__title {
         width: 310px;
     }
 

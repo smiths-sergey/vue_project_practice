@@ -15,8 +15,8 @@
         </div>
         <div v-if="type == 'main'" class="header__right_block">
             <div class="header__chart_info">
-                <p>3 товара</p>
-                <p>на сумму 3 500 ₽</p>
+                <p>{{ countBasket + ' ' + textBasketCount }}</p>
+                <p>{{ 'на сумму ' + sumBasket.toLocaleString() + ' ₽' }}</p>
             </div>
             <router-link to="/basket">
                 <basketIcon />
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 import basketIcon from '@/components/icons/busketIcon.vue';
 import backIcon from '@/components/icons/backIcon.vue';
 import { useRouter } from 'vue-router';
@@ -48,13 +50,36 @@ export default {
     },
     setup() {
         const router = useRouter();
+        const store = useStore();
         const goBack = () => {
-            console.log('goback');
             router.go(-1);
         };
+        const sumBasket = computed(() => {
+            return store.getters.getAllPricePoductsInBasket;
+        });
+
+        const countBasket = computed(() => {
+            return store.getters.getCountProductsInBasket;
+        });
+
+        const textBasketCount = computed(() => {
+            if (
+                store.getters.getCountProductsInBasket > 10 &&
+                store.getters.getCountProductsInBasket < 20
+            )
+                return 'товаров';
+            if (store.getters.getCountProductsInBasket % 10 == 1)
+                return 'товар';
+            if ([2, 3, 4].includes(store.getters.getCountProductsInBasket % 10))
+                return 'товара';
+            return 'товаров';
+        });
 
         return {
             goBack,
+            sumBasket,
+            countBasket,
+            textBasketCount,
         };
     },
 };

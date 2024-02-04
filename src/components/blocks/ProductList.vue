@@ -7,68 +7,21 @@
     >
         <div class="wrapper">
             <Card
-                img-file-name="image1.png"
-                name="Устрицы по рокфеллеровски"
-                description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры "
-                price="2 700 ₽"
+                v-for="(item, i) in productList"
+                :key="i"
+                :imgFileName="item.imgFileName"
+                :description="item.description"
+                :title="item.title"
+                :price="item.price"
                 :type="type"
             />
-            <Card
-                img-file-name="image2.png"
-                name="Устрицы по рокфеллеровски"
-                description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры "
-                price="1600 ₽"
-                :type="type"
-            />
-            <Card
-                img-file-name="image3.png"
-                name="Креветки по-королевски в лимонном соке"
-                description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры обеспечивает широкому кругу "
-                price="1 820 ₽"
-                :type="type"
-            />
-            <template v-if="type == 'main'">
-                <Card
-                    img-file-name="image1.png"
-                    name="Устрицы по рокфеллеровски"
-                    description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры "
-                    price="2 700 ₽"
-                    :type="type"
-                />
-                <Card
-                    img-file-name="image1.png"
-                    name="Устрицы по рокфеллеровски"
-                    description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры "
-                    price="2 700 ₽"
-                    :type="type"
-                />
-                <Card
-                    img-file-name="image2.png"
-                    name="Устрицы по рокфеллеровски"
-                    description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры "
-                    price="1600 ₽"
-                    :type="type"
-                />
-                <Card
-                    img-file-name="image3.png"
-                    name="Креветки по-королевски в лимонном соке"
-                    description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры обеспечивает широкому кругу "
-                    price="1 820 ₽"
-                    :type="type"
-                />
-                <Card
-                    img-file-name="image1.png"
-                    name="Устрицы по рокфеллеровски"
-                    description="Значимость этих проблем настолько очевидна, что укрепление и развитие структуры "
-                    price="2 700 ₽"
-                    :type="type"
-                />
-            </template>
         </div>
     </div>
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 import Card from '@/components/elements/CardProduct.vue';
 export default {
     name: 'ProductList',
@@ -80,6 +33,18 @@ export default {
             type: String,
             default: 'main',
         },
+    },
+    setup(props) {
+        const store = useStore();
+
+        const productList = computed(() => {
+            if (props.type == 'basket') return store.getters.getBasketProducts;
+            return store.getters.getProducts;
+        });
+
+        return {
+            productList,
+        };
     },
 };
 </script>

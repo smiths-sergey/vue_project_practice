@@ -1,11 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import MainPage from '@/views/MainPage.vue';
+import Products from '@/views/Products.vue';
+import Basket from '@/views/Basket.vue';
 
 const routes = [
     {
         path: '/',
         name: 'home',
-        component: MainPage,
+        component: Products,
+    },
+    {
+        path: '/basket',
+        name: 'basket',
+        component: Basket,
     },
 ];
 

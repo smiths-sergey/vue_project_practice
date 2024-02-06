@@ -17,13 +17,15 @@
             </p>
         </div>
         <div class="card__price-block">
-            <p class="card__price">{{ price.toLocaleString()+' ₽' }}</p>
-            <ButtonIcon class="card_button" />
+            <p class="card__price">{{ price.toLocaleString() + ' ₽' }}</p>
+            <ButtonIcon class="card_button" @click="onButtonCLick" />
         </div>
     </div>
 </template>
 
 <script>
+import { getCurrentInstance } from 'vue';
+import { useStore } from 'vuex';
 import ButtonIcon from '@/components/ui/ButtonIcon.vue';
 export default {
     name: 'CardEl',
@@ -32,6 +34,10 @@ export default {
         ButtonIcon,
     },
     props: {
+        id: {
+            type: Number,
+            default: null,
+        },
         title: {
             type: String,
             default: '',
@@ -52,6 +58,21 @@ export default {
             type: String,
             default: 'main',
         },
+    },
+    setup(props) {
+        const busketCardArrayIndex = getCurrentInstance().vnode.key;
+        const store = useStore();
+        const onButtonCLick = () => {
+            if (props.type == 'main') {
+                store.commit('addToBasketProducts', props.id);
+                return;
+            }
+            store.commit('deleteFromBusketProducts', busketCardArrayIndex);
+        };
+
+        return {
+            onButtonCLick,
+        };
     },
 };
 </script>
@@ -106,6 +127,7 @@ export default {
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
+    padding-bottom: 35px;
     .card__main-block {
         display: flex;
         align-items: center;

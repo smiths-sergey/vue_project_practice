@@ -15,8 +15,12 @@
         </div>
         <div v-if="type == 'main'" class="header__right_block">
             <div class="header__chart_info">
-                <p>{{ countBasket + ' ' + textBasketCount }}</p>
-                <p>{{ 'на сумму ' + sumBasket.toLocaleString() + ' ₽' }}</p>
+                <p>
+                    {{ countBasket + ' ' + textBasketCount }}
+                </p>
+                <p>
+                    {{ 'на сумму ' + sumBasket.toLocaleString() + ' ₽' }}
+                </p>
             </div>
             <router-link to="/basket">
                 <basketIcon />
@@ -107,6 +111,10 @@ export default {
         flex-direction: column;
         justify-content: center;
         gap: 5px;
+
+        p {
+            display: block;
+        }
     }
     .header__name {
         font-family: Montserrat;

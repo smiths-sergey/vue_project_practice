@@ -5,10 +5,11 @@
             product__list_basket: type == 'basket',
         }"
     >
-        <div class="wrapper">
+        <div class="card_wrapper">
             <Card
                 v-for="(item, i) in productList"
                 :key="i"
+                :id="item.id"
                 :imgFileName="item.imgFileName"
                 :description="item.description"
                 :title="item.title"
@@ -54,9 +55,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 30px;
     padding: 40px;
-    .wrapper {
+
+    .card_wrapper {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -72,12 +73,10 @@ export default {
     justify-content: center;
     min-width: 900px;
 
-    .wrapper {
+    .card_wrapper {
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 35px;
+        padding-bottom: 35px;
     }
 }
 </style>

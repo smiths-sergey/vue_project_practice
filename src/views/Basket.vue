@@ -1,17 +1,17 @@
 <template>
-    <div class="busket">
+    <div class="basket_wrapper">
         <HeaderBlock type="basket" text="КОРЗИНА С ВЫБРАННЫМИ ТОВРАМИ" />
-        <ProductList type="basket" />
-    </div>
-    <footer class="footer">
-        <div class="content">
-            <div class="order-sum">
-                <p class="name">ЗАКАЗ НА СУММУ:</p>
-                <p class="sum">{{ sumBusket.toLocaleString() + ' ₽' }}</p>
+        <ProductList class="product_list" type="basket" />
+        <footer class="footer">
+            <div class="content">
+                <div class="order-sum">
+                    <p class="name">ЗАКАЗ НА СУММУ:</p>
+                    <p class="sum">{{ sumBusket.toLocaleString() + ' ₽' }}</p>
+                </div>
+                <Button type="basket" text="Оформить заказ"></Button>
             </div>
-            <Button type="basket" text="Оформить заказ"></Button>
-        </div>
-    </footer>
+        </footer>
+    </div>
 </template>
 
 <script>
@@ -42,10 +42,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.busket {
-    height: calc(100vh - 90px);
+.basket_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh);
+}
+
+.product_list {
+    flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .footer {

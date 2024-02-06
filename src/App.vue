@@ -11,6 +11,7 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     font-family: Montserrat;
     background: #161516;

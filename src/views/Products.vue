@@ -1,9 +1,10 @@
 <template>
-    <div class="header__wrapper">
-        <HeaderBlock type="main" text="Наша продукция" />
+    <div class="wrapper">
+        <div class="header__wrapper">
+            <HeaderBlock type="main" text="Наша продукция" />
+        </div>
+        <ProductList class="product_list" type="main" />
     </div>
-
-    <ProductList type="main" />
 </template>
 
 <script>
@@ -20,6 +21,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh);
+}
+
+.product_list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
 .header__wrapper {
     display: flex;
     align-items: center;

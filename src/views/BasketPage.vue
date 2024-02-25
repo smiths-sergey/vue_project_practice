@@ -21,6 +21,7 @@
 <script>
 import { useStore } from 'vuex';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { notification } from 'ant-design-vue';
 
 import HeaderBlock from '@/components/blocks/Header.vue';
@@ -35,18 +36,24 @@ export default {
     Button,
   },
   setup() {
+    const router = useRouter();
     const store = useStore();
     const sumBasket = computed(() => {
       return store.getters.getAllPricePoductsInBasket;
     });
 
     const onPlaceOrder = () => {
+      const sumBasketLocal = sumBasket.value;
       notification.open({
         description: sumBasket.value
           ? 'Заказ оформлен!'
           : 'Корзина пуста! Заказ оформить невозможно.',
       });
-      store.commit('clearBasket');
+      
+      if (sumBasketLocal) {
+        store.commit('clearBasket');
+        router.push(`/`);
+      }
     };
 
     return {

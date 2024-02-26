@@ -45,6 +45,7 @@
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { notification } from 'ant-design-vue';
 import sha256 from 'crypto-js/sha256';
 
 import Button from '@/components/ui/Button.vue';
@@ -118,7 +119,10 @@ export default {
           basket: [],
         };
         store.commit('registerUser', userData);
-        router.push('/');
+        isAuthMode.value = true;
+        notification.open({
+          description: 'Вы успешно зарегистрированы и может выполнить вход.',
+        });
       }
     };
 

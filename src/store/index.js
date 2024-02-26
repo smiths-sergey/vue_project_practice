@@ -63,11 +63,6 @@ export default createStore({
         state.users[userIndex].basket = busket;
         state.currentUserIndex.value = userIndex;
       }
-      state.authorizedUserLogin.value = userData.login;
-      localStorage.setItem(
-        'authorizedUserLogin',
-        state.authorizedUserLogin.value
-      );
     },
     unloginUser(state) {
       state.authorizedUserLogin.value = '';

@@ -43,17 +43,16 @@ export default {
     });
 
     const onPlaceOrder = () => {
-      const sumBasketLocal = sumBasket.value;
       notification.open({
         description: sumBasket.value
           ? 'Заказ оформлен!'
           : 'Корзина пуста! Заказ оформить невозможно.',
       });
-      
-      if (sumBasketLocal) {
+
+      if (sumBasket.value) {
         store.commit('clearBasket');
-        router.push(`/`);
       }
+      router.push(`/`);
     };
 
     return {
